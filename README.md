@@ -1,3 +1,3 @@
-##ToDo App
+#ToDo App
 
-#JavaScript todo list app using local storage
+##JavaScript todo list app using local storage
