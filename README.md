@@ -1,3 +1,8 @@
-#ToDo App
+ToDo App
 
-##JavaScript todo list app using local storage
+JavaScript todo list app using local storage.
+Features: 
+    Add todo
+    Edit todo
+    Mark as complete
+    Remove todo
