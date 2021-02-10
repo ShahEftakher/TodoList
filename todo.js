@@ -28,7 +28,7 @@ function saveTask(input) {
   //push the task object to the array of tasks
   allTasks.push(taskObj);
   //save in the localStorage
-  window.localStorage.setItem("task", JSON.stringify(allTasks));
+  window.localStorage.setItem("tasks", JSON.stringify(allTasks));
   //add the task on the window
   addElements(taskObj);
 }
@@ -36,11 +36,11 @@ function saveTask(input) {
 //get data from local storage
 document.addEventListener("DOMContentLoaded", function () {
   //get all tasks from localstorage
-  allTasks = JSON.parse(window.localStorage.getItem("task"));
+  allTasks = JSON.parse(window.localStorage.getItem("tasks"));
   //if local storage is empty create an empty array in the localstorage
   if (allTasks === null) {
-    window.localStorage.setItem("task", JSON.stringify([]));
-    allTasks = JSON.parse(window.localStorage.getItem("task"));
+    window.localStorage.setItem("tasks", JSON.stringify([]));
+    allTasks = JSON.parse(window.localStorage.getItem("tasks"));
   }
   //retieve all tasks and display them
   allTasks.forEach((task) => {
@@ -149,7 +149,7 @@ function updateTask(input) {
   console.log(currentIndex);
   console.log(input);
   allTasks[currentIndex] = input;
-  window.localStorage.setItem("task", JSON.stringify(allTasks));
+  window.localStorage.setItem("tasks", JSON.stringify(allTasks));
 }
 
 //removing a task
@@ -158,5 +158,6 @@ function removeTask(input) {
   if (currentIndex > -1) {
     allTasks.splice(currentIndex, 1);
   }
-  window.localStorage.setItem("task", JSON.stringify(allTasks));
+  //store the changes
+  window.localStorage.setItem("tasks", JSON.stringify(allTasks));
 }
