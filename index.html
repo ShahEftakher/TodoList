@@ -1,7 +1,12 @@
 <body id="todo">
-  <form onsubmit="getTask();">
-    <input type="text" id="list" onfocus="this.value=''"/>
-    <button type="button" onclick="getTask();" id="submit">Submit</button>
+  <form class="todoForm">
+    <input
+      type="text"
+      id="todo_Input"
+      onfocus="this.value=''"
+      class="todoInput"
+    />
+    <input type="submit" id="submit" class="submit-btn" />
   </form>
   <script src="todo.js"></script>
 </body>
