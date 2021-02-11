@@ -5,6 +5,36 @@ var allTasks = [];
 const todoForm = document.querySelector(".todoForm");
 todoForm.addEventListener("submit", addTodo);
 
+//div to hold the todolists
+const todoDiv = document.getElementById("todoDiv");
+
+//search from and eventlistener
+const searchForm = document.querySelector(".srchForm");
+var clickDebouncer = debounce(
+  function () {
+    todoDiv.innerHTML = "";
+    allTasks.forEach((element) => {
+      var taskStr = element.task;
+      if (taskStr.includes(todoSearch.value)) {
+        console.log("Searching! " + taskStr);
+        addElements(element);
+      }
+    });
+  },
+  1000,
+  "anything :)"
+);
+searchForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+  clickDebouncer();
+});
+
+//body of the aoo
+const todoBody = document.getElementById("todo");
+
+//todo Search field
+const todoSearch = document.querySelector(".search-field");
+
 //add a todo
 function addTodo(event) {
   //recieve input
@@ -34,7 +64,10 @@ function saveTask(input) {
 }
 
 //get data from local storage
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", getTasksFromStorage);
+
+//get data from localStorage
+function getTasksFromStorage() {
   //get all tasks from localstorage
   allTasks = JSON.parse(window.localStorage.getItem("tasks"));
   //if local storage is empty create an empty array in the localstorage
@@ -46,7 +79,7 @@ document.addEventListener("DOMContentLoaded", function () {
   allTasks.forEach((task) => {
     addElements(task);
   });
-});
+}
 
 //add a todo with the html body
 function addElements(input) {
@@ -140,14 +173,12 @@ function addElements(input) {
     div.appendChild(document.createElement("br"));
     return div;
   })();
-  document.getElementById("todo").appendChild(field);
+  todoDiv.appendChild(field);
 }
 
 //updating the edited tasks and storing then in the localStorage
 function updateTask(input) {
   var currentIndex = allTasks.indexOf(input);
-  console.log(currentIndex);
-  console.log(input);
   allTasks[currentIndex] = input;
   window.localStorage.setItem("tasks", JSON.stringify(allTasks));
 }
@@ -161,3 +192,49 @@ function removeTask(input) {
   //store the changes
   window.localStorage.setItem("tasks", JSON.stringify(allTasks));
 }
+
+//debouncer for handling search
+function debounce(callBack, timer, immediate) {
+  var timeOut;
+  return function () {
+    var context = this,
+      args = arguments;
+    var later = function () {
+      timeOut = null;
+      if (!immediate) {
+        callBack.apply(context, args);
+      }
+    };
+    var callNow = immediate && !timeOut;
+    clearTimeout(timeOut);
+    timeOut = setTimeout(later, timer);
+    if (callNow) {
+      callBack.apply(context, args);
+    }
+  };
+}
+
+//keyDebouncer to handlle keyup event
+//and the search function
+var keyDebouncer = debounce(function () {
+  todoDiv.innerHTML = "";
+  allTasks.forEach((element) => {
+    var taskStr = element.task;
+    if (taskStr.includes(todoSearch.value)) {
+      console.log("Searching! " + taskStr);
+      addElements(element);
+    }
+  });
+}, 3000);
+
+//event listener for keyup event
+todoSearch.addEventListener("keyup", function () {
+  if (todoSearch.value.length === 0) {
+    todoDiv.innerHTML = "";
+    getTasksFromStorage();
+  }
+  if (todoSearch.value.length <= 2) {
+    return;
+  }
+  keyDebouncer();
+});
