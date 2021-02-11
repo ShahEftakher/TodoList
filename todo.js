@@ -10,23 +10,8 @@ const todoDiv = document.getElementById("todoDiv");
 
 //search from and eventlistener
 const searchForm = document.querySelector(".srchForm");
-var clickDebouncer = debounce(
-  function () {
-    todoDiv.innerHTML = "";
-    allTasks.forEach((element) => {
-      var taskStr = element.task;
-      if (taskStr.includes(todoSearch.value)) {
-        console.log("Searching! " + taskStr);
-        addElements(element);
-      }
-    });
-  },
-  1000,
-  "anything :)"
-);
 searchForm.addEventListener("submit", (event) => {
   event.preventDefault();
-  clickDebouncer();
 });
 
 //body of the aoo
@@ -193,7 +178,7 @@ function removeTask(input) {
   window.localStorage.setItem("tasks", JSON.stringify(allTasks));
 }
 
-//debouncer for handling search
+//debouncer 
 function debounce(callBack, timer, immediate) {
   var timeOut;
   return function () {
@@ -225,7 +210,7 @@ var keyDebouncer = debounce(function () {
       addElements(element);
     }
   });
-}, 3000);
+}, 500);
 
 //event listener for keyup event
 todoSearch.addEventListener("keyup", function () {
