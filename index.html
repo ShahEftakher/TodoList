@@ -1,25 +1,30 @@
 <html>
+  <head>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
   <body id="todo">
-    <form class="todoForm">
-      <input
-        type="text"
-        id="todo_Input"
-        onfocus="this.value=''"
-        class="todoInput"
-        placeholder="Add todo"
-      />
-      <input type="submit" id="submit" class="submit-btn" />
-    </form>
-    <form class="srchForm">
-      <input
-        type="search"
-        id="todoSearch"
-        class="search-field"
-        placeholder="Search todo..."
-      />
-      <input type="submit" id="submit-srch" value="Search" />
-    </form>
-    <div class="todoList" id="todoDiv"></div>
+    <div class="todowrapper borderstyle">
+      <form class="todoForm">
+        <input
+          type="text"
+          id="todo_Input"
+          onfocus="this.value=''"
+          class="todoInput"
+          placeholder="Add todo"
+        />
+        <input type="submit" id="submit" class="submit-btn" />
+      </form>
+      <form class="srchForm">
+        <input
+          type="search"
+          id="todoSearch"
+          class="search-field"
+          placeholder="Search todo..."
+        />
+        <input type="submit" id="submit-srch" value="Search" />
+      </form>
+      <div class="todoList" id="todoDiv"></div>
+    </div>
     <script src="todo.js"></script>
   </body>
 </html>
