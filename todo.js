@@ -95,7 +95,6 @@ function addElements(input) {
       input.isComplete = true;
       updateTask(input);
       inputTask.remove();
-      console.log(strikeWord.strike());
     };
 
     //remove a task
@@ -206,7 +205,6 @@ var keyDebouncer = debounce(function () {
   allTasks.forEach((element) => {
     var taskStr = element.task;
     if (taskStr.includes(todoSearch.value)) {
-      console.log("Searching! " + taskStr);
       addElements(element);
     }
   });
